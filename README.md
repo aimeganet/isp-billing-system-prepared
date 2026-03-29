@@ -130,3 +130,4 @@ npm run desktop:package
 > `desktop:dev` يشغّل Next.js ثم يفتح التطبيق داخل Electron محليًا.
 > `desktop:package` يبني نسخة Next standalone ثم يجهز حزمة سطح مكتب باستخدام electron-builder.
 # isp-billing-system-prepared
+# isp-billing-system-prepared
