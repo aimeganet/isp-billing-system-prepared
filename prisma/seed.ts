@@ -159,14 +159,14 @@ async function main() {
     });
   }
 
+  // --- تحديث قائمة الموظفين المطلوبة ---
   const employees = [
-    ["المدير", "admin", "Administrator"],
-    ["المشرف", "supervisor", "Supervisor"],
+    ["المدير", "admin-nouer", "Admin"],
+    ["المشرف", "supervisor-nhas", "Supervisor"],
+    ["كاش", "cash-station", "Collector"],
     ["الدسوقي", "desouky", "Collector"],
-    ["أم عبده", "om-abdo", "Collector"],
-    ["ربيع ماهر", "rabee-maher", "Collector"],
-    ["رزق شلبي", "rezk-shalaby", "Collector"],
-    ["السيد أبو طاه", "elsayed-abo-taha", "Collector"]
+    ["الزلزال", "el-zelzal", "Collector"],
+    ["ربيع ماهر", "rabee-maher", "Collector"]
   ] as const;
 
   for (const [name, slug, roleLabel] of employees) {
@@ -179,7 +179,8 @@ async function main() {
 
   const wallets = [
     ["Vodafone Cash", "vodafone-cash"],
-    ["InstaPay", "instapay"]
+    ["InstaPay", "instapay"],
+    ["Fawry", "fawry"]
   ] as const;
 
   for (const [name, code] of wallets) {
@@ -192,8 +193,9 @@ async function main() {
 
   const packages = [
     ["4 جيجا", "P4", 4, 30, 100],
-    ["5 جيجا", "P5", 5, 30, 120],
-    ["10 جيجا", "P10", 10, 30, 200]
+    ["10 جيجا", "P10", 10, 30, 200],
+    ["20 جيجا", "P20", 20, 30, 350],
+    ["باقة إضافية 5ج", "EXTRA5", 5, 30, 120]
   ] as const;
 
   for (const [name, code, gigabytes, durationDays, price] of packages) {
@@ -217,9 +219,8 @@ async function main() {
     ["allowManualSend", "true", "Allow manual sending from invoice detail page"],
     ["requireScreenshotForWallets", "true", "Require screenshot for wallet payments"],
     ["defaultMessageChannel", "WHATSAPP", "Default outbound channel"],
-    ["defaultSubscriptionDays", "30", "Default renewal cycle in days"],
-    ["enableSync", "false", "Enable local to remote sync"],
-    ["mockMessageDelivery", "true", "Simulate outbound delivery while local"]
+    ["currencySymbol", "جنيه", "Currency symbol for invoices"],
+    ["enableSync", "false", "Enable local to remote sync"]
   ] as const;
 
   for (const [key, value, description] of settings) {
@@ -232,35 +233,19 @@ async function main() {
 
   const templates = [
     {
-      name: "رسالة ترحيب",
-      slug: "welcome-whatsapp",
-      channel: MessageChannel.WHATSAPP,
-      eventKey: "welcome",
-      content: "مرحبًا {name}، تم إنشاء اشتراكك بنجاح. الكود: {subscriberCode}. شكرًا لاختيارك خدمتنا.",
-      active: true
-    },
-    {
       name: "فاتورة تجديد",
       slug: "invoice-renewal-whatsapp",
       channel: MessageChannel.WHATSAPP,
       eventKey: "invoice.renewal",
-      content: "مرحبًا {name}، تم إصدار فاتورة {invoiceNo} بقيمة {amount} جنيه لباقة {package}. تاريخ العملية {date}.",
+      content: "مرحبًا {name}، تم تجديد اشتراكك بنجاح. المبلغ: {amount} جنيه بواسطة {collector}. شكراً لتعاملك معنا.",
       active: true
     },
     {
-      name: "فاتورة باقة إضافية",
-      slug: "invoice-extra-whatsapp",
+      name: "تنبيه استهلاك",
+      slug: "usage-alert-whatsapp",
       channel: MessageChannel.WHATSAPP,
-      eventKey: "invoice.extra",
-      content: "مرحبًا {name}، تمت إضافة {package} بقيمة {amount} جنيه. المتبقي الحالي {remaining} جيجا.",
-      active: true
-    },
-    {
-      name: "فاتورة تيليجرام عامة",
-      slug: "invoice-generic-telegram",
-      channel: MessageChannel.TELEGRAM,
-      eventKey: "invoice.generic",
-      content: "فاتورة جديدة للمشترك {name}: {package} - {amount} جنيه - {date}",
+      eventKey: "usage.alert",
+      content: "عزيزي {name}، متبقي في رصيدك {remaining} جيجا بايت فقط. يرجى التجديد قريباً.",
       active: true
     }
   ];
@@ -277,6 +262,7 @@ async function main() {
 main()
   .then(async () => {
     await prisma.$disconnect();
+    console.log("✅ تم حقن البيانات (Seed) بنجاح!");
   })
   .catch(async (error) => {
     console.error(error);
