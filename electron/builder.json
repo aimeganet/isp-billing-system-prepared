@@ -1,0 +1,38 @@
+{
+  "appId": "local.mega-tik.isp-billing-system",
+  "productName": "ISP Billing System",
+  "asar": true,
+  "directories": {
+    "output": "dist-desktop",
+    "buildResources": "electron"
+  },
+  "files": [
+    "electron/**/*",
+    ".next/standalone/**/*",
+    ".next/static/**/*",
+    "public/**/*",
+    "prisma/**/*",
+    "storage/**/*",
+    "package.json"
+  ],
+  "extraMetadata": {
+    "main": "electron/main.cjs"
+  },
+  "win": {
+    "target": [
+      "nsis"
+    ]
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "perMachine": false,
+    "artifactName": "${productName}-Setup-${version}.${ext}"
+  },
+  "asarUnpack": [
+    ".next/standalone/**/*",
+    ".next/static/**/*",
+    "prisma/**/*",
+    "storage/**/*"
+  ]
+}
