@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@prisma/client": "latest",
+    "@prisma/config": "^7.6.0",
     "bcryptjs": "latest",
     "clsx": "latest",
     "date-fns": "latest",
@@ -38,14 +39,14 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "electron": "latest",
+    "electron-builder": "latest",
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
     "prisma": "latest",
     "tailwindcss": "latest",
     "tsx": "latest",
-    "typescript": "latest",
-    "electron": "latest",
-    "electron-builder": "latest"
+    "typescript": "latest"
   }
 }

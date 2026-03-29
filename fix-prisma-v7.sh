@@ -1,4 +1,4 @@
-#!/bash/bin
+#!/bin/bash
 
 echo "🚀 البدء في إصلاح توافق Prisma 7..."
 
