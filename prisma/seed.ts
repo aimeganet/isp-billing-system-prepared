@@ -3,6 +3,9 @@ import { PrismaClient, MessageChannel, UserRoleKey } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// Next: Remove DATABASE_URL to get the seed running
+// For now, let's use migration instead
+
 const permissionGroups = [
   ["dashboard.view", "عرض لوحة التحكم"],
   ["subscribers.read", "عرض المشتركين"],
@@ -159,14 +162,14 @@ async function main() {
     });
   }
 
-  // --- تحديث قائمة الموظفين المطلوبة ---
+  // --- تحديث قائمة الموظفين المطلوبة (6 موظفين حصراً) ---
   const employees = [
-    ["المدير", "admin-nouer", "Admin"],
-    ["المشرف", "supervisor-nhas", "Supervisor"],
-    ["كاش", "cash-station", "Collector"],
-    ["الدسوقي", "desouky", "Collector"],
-    ["الزلزال", "el-zelzal", "Collector"],
-    ["ربيع ماهر", "rabee-maher", "Collector"]
+    ["أحمد نور", "ahmed-nouer", "Admin"],
+    ["محمود النحاس", "mahmoud-elnhas", "Supervisor"],
+    ["كاش", "cash-operator", "Cashier"],
+    ["الدسوقي", "desouky", "Cashier"],
+    ["الزلزال", "el-zelzal", "Cashier"],
+    ["ربيع ماهر", "rabee-maher", "Cashier"]
   ] as const;
 
   for (const [name, slug, roleLabel] of employees) {
@@ -220,6 +223,7 @@ async function main() {
     ["requireScreenshotForWallets", "true", "Require screenshot for wallet payments"],
     ["defaultMessageChannel", "WHATSAPP", "Default outbound channel"],
     ["currencySymbol", "جنيه", "Currency symbol for invoices"],
+    ["currencyCode", "EGP", "ISO 4217 currency code"],
     ["enableSync", "false", "Enable local to remote sync"]
   ] as const;
 

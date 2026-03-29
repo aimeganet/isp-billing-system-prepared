@@ -35,10 +35,12 @@
     "zod": "latest"
   },
   "devDependencies": {
+    "@prisma/internals": "^7.6.0",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "autoprefixer": "latest",
+    "better-sqlite3": "^12.8.0",
     "electron": "latest",
     "electron-builder": "latest",
     "eslint": "latest",

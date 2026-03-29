@@ -1,12 +1,7 @@
-import { defineConfig } from 'prisma/config';
-import { SQLiteAdapter } from '@prisma/adapter-sqlite'; // need to install this package
-
-export default defineConfig({
-  datasource: {
+export default {
+  datasources: {
     db: {
-      adapter: new SQLiteAdapter({
-        url: process.env.DATABASE_URL || 'file:./local.db'
-      })
+      url: 'file:./prisma/dev.db'
     }
   }
-});
+};

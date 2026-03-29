@@ -1,0 +1,1 @@
+This file is to ensure prisma.config.js is not loaded. Prisma 7 seems to have issues with .js config files. We're using inline datasource configuration in schema.prisma instead.
