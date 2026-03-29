@@ -19,8 +19,7 @@
     "desktop:build:web": "node electron/build-desktop.mjs --build-only"
   },
   "dependencies": {
-    "@prisma/client": "latest",
-    "@prisma/config": "^7.6.0",
+    "@prisma/client": "^6.4.1",
     "bcryptjs": "latest",
     "clsx": "latest",
     "date-fns": "latest",
@@ -35,7 +34,6 @@
     "zod": "latest"
   },
   "devDependencies": {
-    "@prisma/internals": "^7.6.0",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
@@ -46,7 +44,7 @@
     "eslint": "latest",
     "eslint-config-next": "latest",
     "postcss": "latest",
-    "prisma": "latest",
+    "prisma": "^6.4.1",
     "tailwindcss": "latest",
     "tsx": "latest",
     "typescript": "latest"
