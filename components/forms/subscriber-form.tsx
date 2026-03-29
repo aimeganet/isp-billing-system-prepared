@@ -1,7 +1,8 @@
 "use client";
 
 import { SubscriberStatus } from "@prisma/client";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { createSubscriberAction, updateSubscriberAction } from "@/actions/subscribers";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -14,6 +15,7 @@ import { StatusMessage } from "@/components/shared/status-message";
 
 type SubscriberFormProps = {
   allowPhoneAsCode: boolean;
+  redirectOnCreateSuccess?: boolean;
   subscriber?: {
     id: string;
     name: string;
@@ -23,9 +25,20 @@ type SubscriberFormProps = {
   };
 };
 
-export function SubscriberForm({ allowPhoneAsCode, subscriber }: SubscriberFormProps) {
+export function SubscriberForm({
+  allowPhoneAsCode,
+  redirectOnCreateSuccess = false,
+  subscriber
+}: SubscriberFormProps) {
+  const router = useRouter();
   const action = subscriber ? updateSubscriberAction : createSubscriberAction;
   const [state, formAction, pending] = useActionState(action, initialActionState);
+
+  useEffect(() => {
+    if (subscriber || !redirectOnCreateSuccess || !state.success) return;
+    router.push("/subscribers");
+    router.refresh();
+  }, [redirectOnCreateSuccess, router, state.success, subscriber]);
 
   return (
     <Card className="max-w-3xl">

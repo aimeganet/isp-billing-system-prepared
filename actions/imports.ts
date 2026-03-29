@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { saveUploadedFile } from "@/lib/storage";
-import { fileToBuffer, initialActionState, normalizePhone } from "@/lib/utils";
+import { fileToBuffer, normalizePhone } from "@/lib/utils";
 import { parseUploadedDocument } from "@/lib/importers";
 import { generateSubscriberCode } from "@/lib/ids";
 import { enqueueSync } from "@/lib/sync";
@@ -11,7 +11,23 @@ import { requirePermission } from "@/lib/auth";
 import { PERMISSIONS } from "@/lib/permissions";
 import { recordAudit } from "@/lib/audit";
 
-export async function createImportPreviewAction(_prevState = initialActionState, formData: FormData) {
+type ImportPreviewState = {
+  success: boolean;
+  message: string;
+  meta?: {
+    importJobId: string;
+  };
+};
+
+const initialImportPreviewState: ImportPreviewState = {
+  success: false,
+  message: ""
+};
+
+export async function createImportPreviewAction(
+  _prevState: ImportPreviewState = initialImportPreviewState,
+  formData: FormData
+): Promise<ImportPreviewState> {
   await requirePermission(PERMISSIONS.IMPORTS_CREATE, "/dashboard");
   const file = formData.get("file");
   const mode = String(formData.get("mode") ?? "UPDATE_EXISTING");

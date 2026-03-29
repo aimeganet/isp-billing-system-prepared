@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import { FloatingAssistant } from "@/components/assistant/floating-assistant";
 
 export function AppShell({
   children,
@@ -26,6 +27,7 @@ export function AppShell({
         {header}
         {children}
       </main>
+      <FloatingAssistant />
     </div>
   );
 }

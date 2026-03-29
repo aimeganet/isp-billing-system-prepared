@@ -11,7 +11,7 @@ export default async function NewSubscriberPage() {
   return (
     <div className="space-y-6">
       <PageHeading title="إضافة مشترك" description="إنشاء مشترك جديد مع معرف ثابت وسجل اتصالات." />
-      <SubscriberForm allowPhoneAsCode={allowPhoneAsCode} />
+      <SubscriberForm allowPhoneAsCode={allowPhoneAsCode} redirectOnCreateSuccess />
     </div>
   );
 }

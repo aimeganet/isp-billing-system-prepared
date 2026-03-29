@@ -8,11 +8,23 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { initialActionState } from "@/lib/utils";
+
+type ImportFormState = {
+  success: boolean;
+  message: string;
+  meta?: {
+    importJobId: string;
+  };
+};
+
+const initialImportState: ImportFormState = {
+  success: false,
+  message: ""
+};
 
 export function ImportForm() {
   const router = useRouter();
-  const [state, formAction, pending] = useActionState(createImportPreviewAction, initialActionState);
+  const [state, formAction, pending] = useActionState(createImportPreviewAction, initialImportState);
 
   useEffect(() => {
     if (state.success && state.meta?.importJobId) {

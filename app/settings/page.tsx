@@ -20,7 +20,15 @@ export default async function SettingsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeading title="الإعدادات" description="إعدادات النظام العامة والفواتير والرسائل والمعرفات." />
+      <PageHeading
+        title="الإعدادات"
+        description="إعدادات النظام العامة والفواتير والرسائل والمعرفات."
+        action={
+          <Link href="/settings/ai" className="rounded-xl bg-slate-950 px-4 py-2 text-sm text-white">
+            إعدادات الذكاء الاصطناعي
+          </Link>
+        }
+      />
       <SettingsForm values={settings} />
       <PackageForm />
       <Card>

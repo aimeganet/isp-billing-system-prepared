@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { logoutAction } from "@/actions/auth";
 import { getCurrentUser } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,9 @@ export async function Header() {
             <div className="font-medium text-slate-900">{user.role}</div>
             <div dir="ltr">{user.email}</div>
           </div>
+          <Link href="/profile" className="rounded-xl border border-slate-200 px-3 py-2 text-sm text-slate-700 hover:bg-slate-50">
+            الملف الشخصي
+          </Link>
           <form action={logoutAction}>
             <Button type="submit" variant="secondary">تسجيل الخروج</Button>
           </form>
